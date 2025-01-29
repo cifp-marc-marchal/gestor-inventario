@@ -26,7 +26,21 @@ public class Inventory {
             }
         }
     }
-  
+
+    public void resumen() {
+        if (inventory.length == 0) {
+            System.out.println("El inventario esta vacio");
+        } else {
+            System.out.println("+-------+----------------+");
+            System.out.println("|  Pos  | Producto");
+            System.out.println("+-------+----------------+");
+            for (int i = 0; i < inventory.length; i++) {
+                System.out.println("|   " + i + "   | " + inventory[i]);
+                System.out.println("+-------+----------------+");
+            }
+        }
+    }
+
     public void insertProduct(String product) {
         // Remove all spaces
         product = product.replaceAll("\\s+","");
@@ -41,7 +55,7 @@ public class Inventory {
         this.inventory = Arrays.copyOf(inventory, inventory.length + 1);
         this.inventory[inventory.length - 1] = product;
     }
-  
+
    public void eliminar(String nombre) {
         String[] eliminado = new String[inventory.length - 1];
         if (!nombre.equals("")) {
