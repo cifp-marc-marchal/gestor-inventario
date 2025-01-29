@@ -50,6 +50,8 @@ public class Inventory {
                     System.arraycopy(this.inventory, 0, eliminado,0, i);
                     System.arraycopy(this.inventory, i + 1, eliminado,i, this.inventory.length - i - 1);
                     this.inventory = eliminado;
+
+                    return;
                 }
             }
         }
