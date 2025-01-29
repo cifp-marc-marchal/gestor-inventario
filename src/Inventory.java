@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Inventory {
     String[] inventory = {"Ordenador", "Mesa", "Silla", "Pantalla", "Lapiz", "Goma", "Teclado", "Raton"};
@@ -27,6 +28,7 @@ public class Inventory {
         }
     }
 
+
     public void resumen() {
         if (inventory.length == 0) {
             System.out.println("El inventario esta vacio");
@@ -43,7 +45,7 @@ public class Inventory {
 
     public void insertProduct(String product) {
         // Remove all spaces
-        product = product.replaceAll("\\s+","");
+        product = product.replaceAll("\\s+", "");
 
         // Lowercase the product
         product = product.toLowerCase();
@@ -56,18 +58,34 @@ public class Inventory {
         this.inventory[inventory.length - 1] = product;
     }
 
-   public void eliminar(String nombre) {
-        String[] eliminado = new String[inventory.length - 1];
+
+    public boolean eliminar(String nombre) {
+         String[] eliminado = new String[inventory.length - 1];
         if (!nombre.equals("")) {
             for (int i = 0; i < this.inventory.length; i++) {
                 if (this.inventory[i].toLowerCase().equals(nombre.toLowerCase())) {
-                    System.arraycopy(this.inventory, 0, eliminado,0, i);
-                    System.arraycopy(this.inventory, i + 1, eliminado,i, this.inventory.length - i - 1);
+                    System.arraycopy(this.inventory, 0, eliminado, 0, i);
+                    System.arraycopy(this.inventory, i + 1, eliminado, i, this.inventory.length - i - 1);
                     this.inventory = eliminado;
-
-                    return;
+                    return true;
                 }
             }
         }
+        return false;
+    }
+
+    public boolean eliminarPos(int posicion) {
+        String[] eliminado = new String[inventory.length - 1];
+        if (posicion >= 0 && posicion < this.inventory.length) {
+            for (int i = 0; i < this.inventory.length; i++) {
+                if (i == posicion) {
+                    System.arraycopy(this.inventory, 0, eliminado, 0, i);
+                    System.arraycopy(this.inventory, i + 1, eliminado, i, this.inventory.length - i - 1);
+                    this.inventory = eliminado;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
