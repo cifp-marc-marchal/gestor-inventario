@@ -89,12 +89,12 @@ public class Inventory {
         return false;
     }
 
-    public static void sustituirProducto(String[] inventario, int posicion, String producto) {
-        if (posicion >= 0 && posicion < inventario.length) {
+    public static void sustituirProducto(int posicion, String producto) {
+        if (posicion >= 0 && posicion < this.inventory.length) {
             producto = producto.replaceAll("\\s+", "");
             producto = producto.toLowerCase();
             producto = producto.substring(0, 1).toUpperCase() + producto.substring(1);
-            inventario[posicion] = producto;
+            this.inventory[posicion] = producto;
         } else {
             System.out.println("Posición fuera de rango.");
         }
