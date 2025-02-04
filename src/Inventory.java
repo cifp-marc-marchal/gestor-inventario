@@ -60,7 +60,7 @@ public class Inventory {
 
 
     public boolean eliminar(String nombre) {
-         String[] eliminado = new String[inventory.length - 1];
+        String[] eliminado = new String[inventory.length - 1];
         if (!nombre.equals("")) {
             for (int i = 0; i < this.inventory.length; i++) {
                 if (this.inventory[i].toLowerCase().equals(nombre.toLowerCase())) {
@@ -87,5 +87,16 @@ public class Inventory {
             }
         }
         return false;
+    }
+
+    public static void sustituirProducto(String[] inventario, int posicion, String producto) {
+        if (posicion >= 0 && posicion < inventario.length) {
+            producto = producto.replaceAll("\\s+", "");
+            producto = producto.toLowerCase();
+            producto = producto.substring(0, 1).toUpperCase() + producto.substring(1);
+            inventario[posicion] = producto;
+        } else {
+            System.out.println("Posición fuera de rango.");
+        }
     }
 }
