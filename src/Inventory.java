@@ -89,7 +89,7 @@ public class Inventory {
         return false;
     }
 
-    public static void sustituirProducto(int posicion, String producto) {
+    public void sustituirProducto(int posicion, String producto) {
         if (posicion >= 0 && posicion < this.inventory.length) {
             producto = producto.replaceAll("\\s+", "");
             producto = producto.toLowerCase();
@@ -97,6 +97,18 @@ public class Inventory {
             this.inventory[posicion] = producto;
         } else {
             System.out.println("Posición fuera de rango.");
+        }
+    }
+
+    public void modificarProducto(String oldName, String newName) {
+        for (int i = 0; i < this.inventory.length; i++) {
+            if (this.inventory[i].equalsIgnoreCase(oldName)) {
+                newName = newName.replaceAll("\\s+", "");
+                newName = newName.toLowerCase();
+                newName = newName.substring(0, 1).toUpperCase() + newName.substring(1);
+                this.inventory[i] = newName;
+                break;
+            }
         }
     }
 }
