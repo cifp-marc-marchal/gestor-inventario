@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Inventory {
     String[] inventory = {"Ordenador", "Mesa", "Silla", "Pantalla", "Lapiz", "Goma", "Teclado", "Raton"};
 
-    public void mostrar() {
+    public void resumen() {
         if (inventory.length == 0) {
             System.out.println("El inventario esta vacio");
         } else {
@@ -28,8 +28,7 @@ public class Inventory {
         }
     }
 
-
-    public void resumen() {
+    public void mostrar() {
         if (inventory.length == 0) {
             System.out.println("El inventario esta vacio");
         } else {
@@ -57,7 +56,6 @@ public class Inventory {
         this.inventory = Arrays.copyOf(inventory, inventory.length + 1);
         this.inventory[inventory.length - 1] = product;
     }
-
 
     public boolean eliminar(String nombre) {
         String[] eliminado = new String[inventory.length - 1];
@@ -89,7 +87,7 @@ public class Inventory {
         return false;
     }
 
-    public static void sustituirProducto(int posicion, String producto) {
+    public void sustituirProducto(int posicion, String producto) {
         if (posicion >= 0 && posicion < this.inventory.length) {
             producto = producto.replaceAll("\\s+", "");
             producto = producto.toLowerCase();

@@ -1,7 +1,10 @@
+import java.sql.Time;
 import java.util.Scanner;
+import java.util.Timer;
 
 public class Main {
     public static void main(String[] args) {
+        Inventory inventory = new Inventory();
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
 
@@ -27,25 +30,31 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Funcionalidad para añadir producto aún no implementada.");
+                    System.out.println("Ingrese el nombre del producto que quieres Insertar: ");
+                    inventory.insertProduct(scanner.nextLine());
                     break;
                 case 2:
-                    System.out.println("Funcionalidad para eliminar producto por nombre aún no implementada.");
+                    System.out.println("Ingrese el nombre del producto que quieres eliminar: ");
+                    inventory.eliminar(scanner.nextLine());
                     break;
                 case 3:
-                    System.out.println("Funcionalidad para eliminar producto por posición aún no implementada.");
+                    System.out.println("Ingrese la posicion del producto que quieres eliminar: ");
+                    inventory.eliminarPos(scanner.nextInt());
                     break;
                 case 4:
-                    System.out.println("Funcionalidad para sustituir producto aún no implementada.");
+                    System.out.println("Ingrese la posicion del producto que quieres sustituir y el producto que quieres substituir: ");
+                    inventory.sustituirProducto(scanner.nextInt(), scanner.nextLine());
                     break;
                 case 5:
                     System.out.println("Funcionalidad para modificar producto aún no implementada.");
                     break;
                 case 6:
-                    System.out.println("Funcionalidad para mostrar productos aún no implementada.");
+                    System.out.println("Mostrando inventario: ");
+                    inventory.mostrar();
                     break;
                 case 7:
-                    System.out.println("Funcionalidad para mostrar resumen del inventario aún no implementada.");
+                    System.out.println("Mostrando resumen del inventario: ");
+                    inventory.resumen();
                     break;
                 case 8:
                     System.out.println("Saliendo del programa. ¡Adiós!");
