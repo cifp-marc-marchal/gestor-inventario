@@ -10,6 +10,9 @@ public class Inventory {
         } else {
             String[] noRepe;
             noRepe = Arrays.copyOf(inventory, inventory.length);
+            System.out.println("+------------------------+");
+            System.out.println("|  Producto  | Cantidad  |");
+            System.out.println("+------------------------+");
             for (int i = 0; i < noRepe.length; i++) {
                 int cont = 0;
                 if (!noRepe[i].equalsIgnoreCase(" ")) {
@@ -21,8 +24,9 @@ public class Inventory {
                             }
                         }
                     }
-                    System.out.print(noRepe[i] + " ");
+                    System.out.print("|   " + noRepe[i] + "   | " );
                     System.out.println(cont);
+                    System.out.println("+-----------------------+");
                 }
             }
         }
@@ -32,12 +36,12 @@ public class Inventory {
         if (inventory.length == 0) {
             System.out.println("El inventario esta vacio");
         } else {
-            System.out.println("+-------+----------------+");
+            System.out.println("+------------------------+");
             System.out.println("|  Pos  | Producto");
-            System.out.println("+-------+----------------+");
+            System.out.println("+------------------------+");
             for (int i = 0; i < inventory.length; i++) {
                 System.out.println("|   " + i + "   | " + inventory[i]);
-                System.out.println("+-------+----------------+");
+                System.out.println("+------------------------+");
             }
         }
     }

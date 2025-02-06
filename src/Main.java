@@ -46,7 +46,8 @@ public class Main {
                     inventory.sustituirProducto(scanner.nextInt(), scanner.nextLine());
                     break;
                 case 5:
-                    System.out.println("Funcionalidad para modificar producto aún no implementada.");
+                    System.out.println("Ingresa primero lo que quieres cambiar y luego lo que quieres poner: ");
+                    inventory.modificarProducto(scanner.next(), scanner.next());
                     break;
                 case 6:
                     System.out.println("Mostrando inventario: ");
@@ -65,7 +66,6 @@ public class Main {
                     break;
             }
         }
-
         scanner.close();
     }
 }
