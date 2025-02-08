@@ -1,8 +1,51 @@
+import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Inventory {
     String[] inventory = {"Ordenador", "Mesa", "Silla", "Pantalla", "Lapiz", "Goma", "Teclado", "Raton"};
+
+    public Inventory() {
+        File file = new File("inventory.txt");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                saveInventoryToFile();
+            } catch (IOException e) {
+                System.out.println("Error al crear el archivo");
+            }
+        } else {
+            try {
+                Scanner scanner = new Scanner(file);
+                if (scanner.hasNextLine()) {
+                    int size = Integer.parseInt(scanner.nextLine());
+                    this.inventory = new String[size];
+                    for (int i = 0; i < this.inventory.length; i++) {
+                        this.inventory[i] = scanner.nextLine();
+                    }
+                }
+                scanner.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("Error al leer el archivo");
+            } catch (NumberFormatException e) {
+                System.out.println("Error en el formato del archivo de inventario");
+            }
+        }
+    }
+
+    private void saveInventoryToFile() {
+        File file = new File("inventory.txt");
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write(inventory.length + "\n");
+            for (String string : inventory) {
+                writer.write(string + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo");
+        }
+    }
 
     public void resumen() {
         if (inventory.length == 0) {
@@ -43,21 +86,14 @@ public class Inventory {
     }
 
     public void insertProduct(String product) {
-        // Remove all spaces
-        product = product.replaceAll("\\s+", "");
-
-        // Lowercase the product
-        product = product.toLowerCase();
-
-        // Make the first letter uppercase
-        product = product.substring(0, 1).toUpperCase() + product.substring(1);
-
-        // Do a copy of the array and add the new product
+        product = Helpers.normalize(product);
         this.inventory = Arrays.copyOf(inventory, inventory.length + 1);
         this.inventory[inventory.length - 1] = product;
+        saveInventoryToFile();
     }
 
     public boolean eliminar(String nombre) {
+        nombre = Helpers.normalize(nombre);
         String[] eliminado = new String[inventory.length - 1];
         if (!nombre.equals("")) {
             for (int i = 0; i < this.inventory.length; i++) {
@@ -65,6 +101,7 @@ public class Inventory {
                     System.arraycopy(this.inventory, 0, eliminado, 0, i);
                     System.arraycopy(this.inventory, i + 1, eliminado, i, this.inventory.length - i - 1);
                     this.inventory = eliminado;
+                    saveInventoryToFile();
                     return true;
                 }
             }
@@ -80,6 +117,7 @@ public class Inventory {
                     System.arraycopy(this.inventory, 0, eliminado, 0, i);
                     System.arraycopy(this.inventory, i + 1, eliminado, i, this.inventory.length - i - 1);
                     this.inventory = eliminado;
+                    saveInventoryToFile();
                     return true;
                 }
             }
@@ -89,10 +127,9 @@ public class Inventory {
 
     public void sustituirProducto(int posicion, String producto) {
         if (posicion >= 0 && posicion < this.inventory.length) {
-            producto = producto.replaceAll("\\s+", "");
-            producto = producto.toLowerCase();
-            producto = producto.substring(0, 1).toUpperCase() + producto.substring(1);
+            producto = Helpers.normalize(producto);
             this.inventory[posicion] = producto;
+            saveInventoryToFile();
         } else {
             System.out.println("Posición fuera de rango.");
         }
@@ -101,10 +138,9 @@ public class Inventory {
     public void modificarProducto(String oldName, String newName) {
         for (int i = 0; i < this.inventory.length; i++) {
             if (this.inventory[i].equalsIgnoreCase(oldName)) {
-                newName = newName.replaceAll("\\s+", "");
-                newName = newName.toLowerCase();
-                newName = newName.substring(0, 1).toUpperCase() + newName.substring(1);
+                newName = Helpers.normalize(newName);
                 this.inventory[i] = newName;
+                saveInventoryToFile();
                 break;
             }
         }
